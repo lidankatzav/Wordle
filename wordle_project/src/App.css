@@ -1,13 +1,30 @@
 .App {
   text-align: center;
+  height: 100vh;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Header {
+  display: flex;
+  height: 20vh;
+  align-items: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
+.logo {
+  display: block;
+  width: 30%;
+  height: 50%;
+}
+
+.Header > text {
+  font-size: 100%;
+}
+
+.config, .info {
+  width: 5%;
+  height: 40%;
+}
+
+/* @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
@@ -35,4 +52,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
