@@ -1,0 +1,28 @@
+.board{
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.line {
+	display: flex;
+    justify-content: center;
+	margin-top: 5px;
+}
+
+.board-letter {
+	width: 80px;
+	height: 70px;
+	margin-left: 7px;
+	text-align: center;
+	font-size: 50px;
+	border: 1px solid black;
+} 
+
+.form-control:focus {
+	border: 2px inset black;
+	box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.075), 0 0 15px rgba(33, 33, 33, 0.6);
+  }
+  
