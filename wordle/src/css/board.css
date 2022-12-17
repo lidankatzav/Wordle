@@ -9,7 +9,7 @@
 .line {
 	display: flex;
     justify-content: center;
-	margin-top: 5px;
+	margin-top: 6px;
 }
 
 .board-letter {
@@ -17,12 +17,13 @@
 	height: 70px;
 	margin-left: 7px;
 	text-align: center;
+	align-items: center;
+	justify-content: center;
 	font-size: 50px;
 	border: 1px solid black;
 } 
 
-.form-control:focus {
+.board-letter:focus {
 	border: 2px inset black;
 	box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.075), 0 0 15px rgba(33, 33, 33, 0.6);
   }
-  

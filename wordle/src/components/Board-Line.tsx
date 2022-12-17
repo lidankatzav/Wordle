@@ -1,13 +1,21 @@
-import React from "react";
+import { useContext } from "react";
+import {BoardContext} from "../providers/BoardContext";
 
-export function BoardLine(): JSX.Element {
-    return (
+export function BoardLine(props: {line: string[], indexLine: number}) {
+
+    const {line, indexLine} = props;
+    const {currentInput} = useContext(BoardContext);
+
+    return(
         <div className="line">
-                <input className="board-letter input-group form-control bg-light"></input>
-                <input className="board-letter input-group form-control bg-light"></input>
-                <input className="board-letter input-group form-control bg-light"></input>
-                <input className="board-letter input-group form-control bg-light"></input>
-                <input className="board-letter input-group form-control bg-light"></input>
+            {line.map((key, colIndex) => {
+                if (indexLine === currentInput.row && colIndex === currentInput.col) {
+                    return <input className="board-letter form-control bg-light" autoFocus></input>;
+                }
+                else {
+                    return <div className="board-letter bg-light">{key}</div>;
+                }
+            })}
         </div>
     );
 }

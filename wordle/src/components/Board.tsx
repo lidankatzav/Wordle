@@ -1,16 +1,18 @@
-import React from "react";
+import { useContext } from "react";
 import '../css/board.css';
 import {BoardLine} from "./Board-Line";
+import {BoardContext} from "../providers/BoardContext";
 
 export function Board(): JSX.Element {
 
-    const numberOfTries = 5; // props in future
+    const {boardArray} = useContext(BoardContext);
 
     return (
         <>
         <br/>
         <div className="board">
-            {Array.from({length: numberOfTries}, () => <BoardLine/>)}
+            {boardArray.map((line: string[], index:number) => 
+                <BoardLine line={line} indexLine = {index}/>)}
         </div>
         </>
     );
