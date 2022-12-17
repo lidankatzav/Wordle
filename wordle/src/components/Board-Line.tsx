@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import {BoardContext} from "../providers/BoardContext";
 
 export function BoardLine(props: {line: string[], indexLine: number}) {
@@ -10,7 +10,7 @@ export function BoardLine(props: {line: string[], indexLine: number}) {
         <div className="line">
             {line.map((key, colIndex) => {
                 if (indexLine === currentInput.row && colIndex === currentInput.col) {
-                    return <input className="board-letter form-control bg-light" autoFocus></input>;
+                    return <input className="board-letter form-control bg-light" value={""} autoFocus></input>;
                 }
                 else {
                     return <div className="board-letter bg-light">{key}</div>;
