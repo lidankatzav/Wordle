@@ -1,14 +1,18 @@
-import { useState } from "react";
+import React, { useState } from "react";
+
 import {Topbar} from "./components/Topbar";
 import {Board} from "./components/Board";
 import {Keyboard} from "./components/Keyboard";
+
 import {BoardContext} from "./providers/BoardContext";
+import {TopbarContext} from "./providers/TopbarContext";
 
 function App(): JSX.Element {
 
   let numberOfTries = 5;
   const [boardArray, setBoardArray] = useState(Array.from({length: numberOfTries}, () => ["","","","",""]));
   const [currentInput, setCurrentInput] =  useState({row: 0, col: 0});
+  const [isInfo, setIsInfo] = useState(false);
 
   const addToCurrentInput = ():void => {
       if(currentInput.col < 4) {
@@ -67,13 +71,16 @@ function App(): JSX.Element {
       }
   }
 
+
   return (
     <BoardContext.Provider value = {{boardArray, setBoardArray, currentInput, setCurrentInput, handleKeyUp}}>
+    <TopbarContext.Provider value = {{isInfo, setIsInfo}}>
       <div onKeyUp = {(event) =>  handleKeyUp(event.key)} >
       <Topbar/>
       <Board/>
       <Keyboard/>
       </div>
+    </TopbarContext.Provider>
     </BoardContext.Provider>
   );
 }

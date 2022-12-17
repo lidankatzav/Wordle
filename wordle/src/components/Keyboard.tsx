@@ -18,6 +18,7 @@ export function Keyboard(): JSX.Element {
                     </div>
                 ))}
             </div>
+            <br/>
         </>
     );
 }
