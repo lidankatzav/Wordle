@@ -20,6 +20,7 @@
 	justify-content: center;
 	font-size: 50px;
 	border: 1px solid black;
+	border-radius: 4px;
 } 
 
 .board-letter:focus {

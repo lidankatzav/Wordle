@@ -18,7 +18,7 @@ function App(): JSX.Element {
       if(currentInput.col < 4) {
         setCurrentInput({row: currentInput.row, col: currentInput.col + 1});
       } 
-      else if (currentInput.col === 4) {
+      if (currentInput.col === 4) {
         setCurrentInput({row: currentInput.row+1, col: 0});
       }
   }
@@ -34,7 +34,6 @@ function App(): JSX.Element {
       return newLine;
     })
     setBoardArray(newBoardArray);
-    addToCurrentInput();
   };
 
   const decreaseCurrentInput = (): void => {
@@ -57,18 +56,21 @@ function App(): JSX.Element {
       return newLine;
     })
     setBoardArray(newBoardArray);
-    decreaseCurrentInput();
   }
 
   const handleKeyUp = (key:string):void => {
+    if(currentInput.col <= 4) {
       if (key === "Backspace" || key === "Delete") {
         removeLetterFromBoard();
+        decreaseCurrentInput();
         return;
       }
-      if (/^[a-zA-Z]+/.test(key)) {
+      if (/[a-zA-Z]/.test(key) && key.length === 1) {
         addLetterToBoard(key);
+        addToCurrentInput();
         return;
       }
+    }
   }
 
 
