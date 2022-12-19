@@ -12,6 +12,7 @@ export function Topbar():  JSX.Element {
 
     {/* Left elements: log in & language */}
     <ul className="navbar-nav flex-row align-items-center me-2 mb-1">
+
       <li className="nav-item me-3 me-lg-1">
         <button type="button" className="btn btn-dark btn-lg btn-floating">
                   <svg xmlns="http://www.w3.org/2000/svg" width="35" height="45" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16">
@@ -20,12 +21,14 @@ export function Topbar():  JSX.Element {
                   </svg>
         </button>
       </li>
+
       <li className="nav-item me-3 me-lg-1">
         <button type="button" className="btn btn-dark btn-lg btn-floating">
                 <img src="https://www.nicepng.com/png/full/6-63506_usa-png-clipart-american-flag-icon-png.png" width="60" height="45" className="bi bi-person-circle" />
                 {/* Israel --> <img src="https://flagicons.lipis.dev/flags/4x3/il.svg" width="40" height="45" className="bi bi-person-circle" /> */}
         </button>
       </li>
+
     </ul>
 
     {/* Center element: wordle logo */}
@@ -39,6 +42,7 @@ export function Topbar():  JSX.Element {
 
     {/* /* Right elements: info & settings */}
     <ul className="navbar-nav flex-row align-items-center me-2 mb-1">
+
       <li className="nav-item me-3 me-lg-1">
         <button type="button" className="btn btn-dark btn-lg btn-floating" onChange = {() => setIsInfo(!isInfo)} data-mdb-toggle="modal" data-mdb-target="#staticBackdrop" >
                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="45" fill="currentColor" className="bi bi-info-lg" viewBox="0 0 16 16">
@@ -46,6 +50,7 @@ export function Topbar():  JSX.Element {
                     </svg>
         </button>
       </li>
+
       <li className="nav-item me-3 me-lg-1">
         <button type="button" className="btn btn-dark btn-lg btn-floating">
                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="45" fill="currentColor" className="bi bi-gear" viewBox="0 0 16 16">
@@ -54,6 +59,7 @@ export function Topbar():  JSX.Element {
                     </svg>
         </button>
       </li>
+
     </ul>
     </div>
     </nav>
