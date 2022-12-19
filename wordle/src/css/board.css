@@ -19,11 +19,12 @@
 	text-align: center;
 	justify-content: center;
 	font-size: 50px;
-	border: 1px solid black;
+	color: white;
 	border-radius: 4px;
 } 
 
 .board-letter:focus {
-	border: 2px inset black;
-	box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.075), 0 0 15px rgba(33, 33, 33, 0.6);
+	border: 1px inset white;
+	color: white;
+	box-shadow: inset 0 4px 4px rgba(255, 255, 255, 0.956), 0 0 15px rgba(255, 255, 255, 0.6);
   }

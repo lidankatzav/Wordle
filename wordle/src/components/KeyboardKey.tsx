@@ -7,7 +7,7 @@ export function KeyboradKey(props: { keyValue: string }):  JSX.Element {
     const {handleKeyUp} = useContext(BoardContext);
 
     return (
-        <button className="keyboard-key input-group form-control bg-light" onClick = {() => handleKeyUp(keyValue)}>
+        <button className="keyboard-key input-group form-control bg-secondary" onClick = {() => handleKeyUp(keyValue)}>
             {keyValue}
         </button>
     );

@@ -20,6 +20,7 @@ function App(): JSX.Element {
       } 
       if (currentInput.col === 4) {
         setCurrentInput({row: currentInput.row+1, col: 0});
+        alert("done");
       }
   }
 

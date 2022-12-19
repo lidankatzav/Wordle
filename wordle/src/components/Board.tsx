@@ -9,7 +9,6 @@ export function Board(): JSX.Element {
 
     return (
         <>
-        <br/>
         <div className="board">
             {boardArray.map((line: string[], index:number) => 
                 <BoardLine line={line} indexLine = {index} key={index}/>)}
