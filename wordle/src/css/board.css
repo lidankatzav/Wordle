@@ -24,7 +24,7 @@
 } 
 
 .board-letter:focus {
-	border: 1px inset white;
+	border: 1px solid white;
 	color: white;
-	box-shadow: inset 0 4px 4px rgba(255, 255, 255, 0.956), 0 0 15px rgba(255, 255, 255, 0.6);
+	box-shadow: inset 0 3px 3px 1px rgba(255, 255, 255, 0.956), 0 0 3px 3px rgba(255, 255, 255, 0.6);
   }
