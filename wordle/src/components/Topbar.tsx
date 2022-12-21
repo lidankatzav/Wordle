@@ -40,7 +40,7 @@ export function Topbar():  JSX.Element {
         />
     </a>
 
-    {/* /* Right elements: info & settings */}
+    {/* Right elements: info & settings */}
     <ul className="navbar-nav flex-row align-items-center me-2 mb-1">
 
       <li className="nav-item me-3 me-lg-1">
