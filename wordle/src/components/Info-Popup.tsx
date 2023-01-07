@@ -5,6 +5,7 @@ import infopart1 from "../imgs/info-part1.png";
 import infopart2 from "../imgs/info-part2.png";
 import infopart3 from "../imgs/info-part3.png";
 
+
 export function InfoPopup() {
   const {showInfo, setShowInfo} = useContext(TopbarContext);
 

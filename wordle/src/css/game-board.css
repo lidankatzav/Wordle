@@ -15,7 +15,7 @@
 .board-letter, .board-letter:focus {
 	width: 70px;
 	height: 70px;
-	margin-left: 5px;
+	margin-left: 4px;
 	text-align: center;
 	justify-content: center;
 	font-size: 50px;
@@ -26,7 +26,7 @@
 	font-family: "Helvetica Neue";
 	align-items: center;
 	font-weight: 700;
-	margin: 3px;
+	margin: 2px;
 	font-size: 45px;
 	box-shadow: inset 2px solif #dee1e9;
 } 
