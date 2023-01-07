@@ -10,10 +10,13 @@ export function BoardLine(props: {line: string[], indexLine: number}) {
         <div className="line">
             {line.map((key, colIndex) => {
                 if (indexLine === currentInput.row && colIndex === currentInput.col) {
-                    return <input className="board-letter form-control bg-secondary" value={""} autoFocus></input>;
+                    return <input className="board-letter form-control" value="" autoFocus></input>;
+                }
+                else if(key) {
+                    return <div className="board-letter written-letter">{key}</div>;
                 }
                 else {
-                    return <div className="board-letter bg-secondary">{key}</div>;
+                    return <div className="board-letter">{key}</div>;
                 }
             })}
         </div>

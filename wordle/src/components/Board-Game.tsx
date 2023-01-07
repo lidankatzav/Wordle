@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import '../css/board.css';
+import '../css/game-board.css';
 import {BoardLine} from "./Board-Line";
 import {BoardContext} from "../providers/BoardContext";
 
-export function Board(): JSX.Element {
+export function BoardGame(): JSX.Element {
 
     const {boardArray} = useContext(BoardContext);
 
