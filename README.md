@@ -1,4 +1,4 @@
-# WORDLE - final project WebDev 2023
+# WORDLE - Final Project WebDev 2023
 **Made By Lidan Katzav**
 
 **Instructions**
