@@ -23,10 +23,7 @@ export function InfoPopup() {
           You get five chances (or you choose another) to guess the secret word, and the color of the letters changes to indicate your progress.
           </p>
           <p>
-          Each guess must be a vaild 5-letter word.
-          </p>
-          <p>
-          For example:
+          Each guess must be a vaild 5-letter word. For example:
           </p>
           <img src = {infopart1} height="70" width="300"/>
           <p>

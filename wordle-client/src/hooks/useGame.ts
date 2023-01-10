@@ -53,7 +53,7 @@ export function useGame() {
   
     const handleKeyUp = (key:string):void => {
       if(currentInput.col <= 4) {
-        if (key === "Backspace" || key === "Delete") {
+        if (key === "Backspace" || key === "Del") {
           removeLetterFromBoard();
           decreaseCurrentInput();
           return;
