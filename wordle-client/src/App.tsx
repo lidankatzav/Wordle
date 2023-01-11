@@ -5,13 +5,14 @@ import { Routes, Route } from "react-router-dom";
 
 function App(): JSX.Element {
 
+  const user = false;
   return (
     <Routes>
-      <Route path="*" element={<SignIn/>} />
-      <Route path="/game" element={<Game/>} />
+      {user && <Route path="*" element={<SignIn/>} />}
+      {!user && <Route path="*" element={<Game/>} />}
     </Routes>
   );
-}
+};
 
 export default App;
 

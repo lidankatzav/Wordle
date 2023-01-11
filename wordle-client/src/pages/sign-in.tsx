@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import { Modal, Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { GoogleLogin } from 'react-google-login';
 import { gapi } from 'gapi-script';
 import '../css/sign-in.css';
@@ -7,7 +6,6 @@ import '../css/sign-in.css';
 function SignIn() {
 
   const clientId = '315535657625-nro53umh3f8fetctnmrdltj0fq2vtlpl.apps.googleusercontent.com';
-
 
   useEffect(() => {
     const initClient = () => {

@@ -41,3 +41,21 @@
 	box-shadow: inset 0 0 0 black, 0px 0px 0px black;
     background-color: #c4cbdd;
 }
+
+.yellow, .yellow:hover  {
+	background-color: #f3c237;
+	color: white;
+	border: 2px solid #f3c237;
+}
+
+.green, .green:hover  {
+	background-color: #6fb469;
+	color: white;
+	border: 2px solid #6fb469;
+}
+
+.grey, .grey:hover {
+	background-color: #a4aec4;
+	color: white;
+	border: 2px solid #a4aec4;
+}

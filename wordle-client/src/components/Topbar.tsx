@@ -25,7 +25,7 @@ export function Topbar():  JSX.Element {
 
       <li className="nav-item me-3 me-lg-1">
         <button type="button" className="btn btn-secondary">
-                <img src="https://www.nicepng.com/png/full/6-63506_usa-png-clipart-american-flag-icon-png.png" width="45" height="25" className="bi bi-person-circle" />
+                <img src="https://www.nicepng.com/png/full/6-63506_usa-png-clipart-american-flag-icon-png.png" width="35" height="25" className="bi bi-person-circle" />
                 {/* Israel --> <img src="https://flagicons.lipis.dev/flags/4x3/il.svg" width="40" height="45" className="bi bi-person-circle" /> */}
         </button>
       </li>
@@ -36,7 +36,7 @@ export function Topbar():  JSX.Element {
     <a className="navbar-brand me-2 mb-1 d-flex align-items-center">
         <img
           src="https://camo.githubusercontent.com/9633ba7687fe294301734b7516c64a92cbd756558850330837115ace9c610f3a/68747470733a2f2f692e696d6775722e636f6d2f795870526636302e706e67"
-          height="70"
+          height="60"
           alt="Wordle Logo"
         />
     </a>

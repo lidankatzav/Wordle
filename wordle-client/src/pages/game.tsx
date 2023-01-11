@@ -12,11 +12,13 @@ import {useGame} from "../hooks/useGame";
 
 function Game(): JSX.Element {
 
-  const {boardArray, setBoardArray, currentInput, setCurrentInput, handleKeyUp} = useGame();
+  const {boardArray, currentInput, handleKeyUp, 
+    colorsArray, chganeClassNameByColor, colorsMap} = useGame();
   const [showInfo, setShowInfo] = useState(false);
-
+  
   return (
-    <BoardContext.Provider value = {{boardArray, setBoardArray, currentInput, setCurrentInput, handleKeyUp}}>
+    <BoardContext.Provider value = { {boardArray, currentInput, handleKeyUp, 
+      colorsArray, chganeClassNameByColor, colorsMap}}>
     <TopbarContext.Provider value = {{showInfo, setShowInfo}}>
       <div onKeyUp = {(event) =>  handleKeyUp(event.key)} >
       <Topbar/>

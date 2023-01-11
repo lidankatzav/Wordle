@@ -4,7 +4,7 @@ import {BoardContext} from "../providers/BoardContext";
 export function BoardLine(props: {line: string[], indexLine: number}) {
 
     const {line, indexLine} = props;
-    const {currentInput} = useContext(BoardContext);
+    const {currentInput, colorsArray, chganeClassNameByColor} = useContext(BoardContext);
 
     return(
         <div className="line">
@@ -13,10 +13,11 @@ export function BoardLine(props: {line: string[], indexLine: number}) {
                     return <input className="board-letter form-control" value="" autoFocus></input>;
                 }
                 else if(key) {
-                    return <div className="board-letter written-letter">{key}</div>;
+                    const keyClassName = chganeClassNameByColor(colorsArray[indexLine][colIndex], 'board-letter written-letter');
+                    return <div className={keyClassName}>{key}</div>;
                 }
                 else {
-                    return <div className="board-letter">{key}</div>;
+                    return <div className="board-letter"></div>;
                 }
             })}
         </div>

@@ -4,10 +4,11 @@ import { BoardContext } from "../providers/BoardContext";
 export function KeyboradKey(props: { keyValue: string }):  JSX.Element {
 
     const {keyValue} = props;
-    const {handleKeyUp} = useContext(BoardContext);
-
+    const {handleKeyUp, colorsMap, chganeClassNameByColor} = useContext(BoardContext);
+    const keyClassName = chganeClassNameByColor(colorsMap.get(keyValue.toUpperCase()), 'keyboard-key input-group form-control');
+    
     return (
-        <button className="keyboard-key input-group form-control" onClick = {() => handleKeyUp(keyValue)}>
+        <button className={keyClassName} onClick = {() => handleKeyUp(keyValue)}>
             {keyValue}
         </button>
     );
