@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Game from "./pages/game";
 import SignIn from "./pages/sign-in";
 import { Routes, Route } from "react-router-dom";
@@ -7,7 +7,14 @@ import {UserContext} from "./providers/UserContext";
 function App(): JSX.Element {
 
   const [user, setUser] = useState([]);
-
+  
+  // useEffect(() => {
+  //   const storedUser = localStorage.getItem('user');
+  //   if (storedUser) {
+  //     setUser(JSON.parse(storedUser));
+  //   }
+  // }, []);
+  
   return (
     <UserContext.Provider value = {{user, setUser}}>
     <Routes>

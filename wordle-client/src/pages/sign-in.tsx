@@ -21,7 +21,7 @@ function SignIn() {
   });
 
   const onSuccess = (res) => {
-      setUser([res.profileObj.name, res.profileObj.email]);
+    setUser([res.profileObj.name, res.profileObj.email]);
   };
   
   const onFailure = (err) => {
