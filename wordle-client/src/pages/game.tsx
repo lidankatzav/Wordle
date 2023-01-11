@@ -3,10 +3,10 @@ import React, {useState} from "react";
 import {Topbar} from "../components/Topbar";
 import {BoardGame} from "../components/Board-Game";
 import {Keyboard} from "../components/Keyboard";
+import {InfoPopup} from "../components/Info-Popup";
 
 import {BoardContext} from "../providers/BoardContext";
 import {TopbarContext} from "../providers/TopbarContext";
-import {InfoPopup} from "../components/Info-Popup";
 
 import {useGame} from "../hooks/useGame";
 

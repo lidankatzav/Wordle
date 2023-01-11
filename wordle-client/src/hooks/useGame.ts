@@ -20,10 +20,10 @@ export function useGame() {
       if(currentInput.row >= 1) {
         const result = checkWinOrLost(currentInput.row-1);
         if(result) {
-          console.log("win");
+          alert("win!");
         }
         else if(!result && currentInput.row === numberOfTries) {
-          console.log("end");
+          alert("lost!");
         }
         updateColorsMap();
       }

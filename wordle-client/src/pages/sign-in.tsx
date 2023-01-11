@@ -1,9 +1,12 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
 import { GoogleLogin } from 'react-google-login';
 import { gapi } from 'gapi-script';
 import '../css/sign-in.css';
+import {UserContext} from "../providers/UserContext";
 
 function SignIn() {
+
+  const {user, setUser} =  useContext(UserContext);
 
   const clientId = '315535657625-nro53umh3f8fetctnmrdltj0fq2vtlpl.apps.googleusercontent.com';
 
@@ -18,10 +21,11 @@ function SignIn() {
   });
 
   const onSuccess = (res) => {
-      console.log('success:', res);
+      setUser([res.profileObj.name, res.profileObj.email]);
   };
+  
   const onFailure = (err) => {
-      console.log('failed:', err);
+      setUser([]);
   };
 
   return (
@@ -37,7 +41,7 @@ function SignIn() {
                           onSuccess={onSuccess}
                           onFailure={onFailure}
                           cookiePolicy={'single_host_origin'}
-                          isSignedIn={true}
+                          isSignedIn={false}
                           />
           </div>
           <span>Or</span>
