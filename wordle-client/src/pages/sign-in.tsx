@@ -20,7 +20,7 @@ function SignIn() {
     gapi.load('client:auth2', initClient);
   });
 
-  const onSuccess = (res: { profileObj: { name: any; email: any; }; }) => {
+  const onSuccess = (res) => {
     const newUser = [res.profileObj.name, res.profileObj.email];
     localStorage.setItem('user', JSON.stringify(newUser));
     setUser(newUser);
