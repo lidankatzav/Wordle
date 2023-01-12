@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import Modal from 'react-bootstrap/Modal';
-import { TopbarContext } from "../providers/TopbarContext";
-import infopart1 from "../imgs/info-part1.png";
-import infopart2 from "../imgs/info-part2.png";
-import infopart3 from "../imgs/info-part3.png";
+import { TopbarContext } from "../../providers/TopbarContext";
+import infopart1 from "../../imgs/info-part1.png";
+import infopart2 from "../../imgs/info-part2.png";
+import infopart3 from "../../imgs/info-part3.png";
 
 
 export function InfoPopup() {

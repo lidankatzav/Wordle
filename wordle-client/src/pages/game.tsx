@@ -3,13 +3,13 @@ import React, {useState} from "react";
 import {Topbar} from "../components/Topbar";
 import {BoardGame} from "../components/Board-Game";
 import {Keyboard} from "../components/Keyboard";
-import {InfoPopup} from "../components/Info-Popup";
+import {InfoPopup} from "../components/Popups/Info-Popup";
 
 import {BoardContext} from "../providers/BoardContext";
 import {TopbarContext} from "../providers/TopbarContext";
 
 import {useGame} from "../hooks/useGame";
-import { ProfilePopup } from "../components/Profile-Popup";
+import { ProfilePopup } from "../components/Popups/Profile-Popup";
 
 function Game(): JSX.Element {
 

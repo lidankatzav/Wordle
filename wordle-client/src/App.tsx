@@ -8,12 +8,12 @@ function App(): JSX.Element {
 
   const [user, setUser] = useState([]);
   
-  // useEffect(() => {
-  //   const storedUser = localStorage.getItem('user');
-  //   if (storedUser) {
-  //     setUser(JSON.parse(storedUser));
-  //   }
-  // }, []);
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
   
   return (
     <UserContext.Provider value = {{user, setUser}}>

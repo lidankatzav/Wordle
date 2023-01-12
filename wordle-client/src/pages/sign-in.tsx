@@ -6,7 +6,7 @@ import {UserContext} from "../providers/UserContext";
 
 function SignIn() {
 
-  const {user, setUser} =  useContext(UserContext);
+  const {setUser} =  useContext(UserContext);
 
   const clientId = '315535657625-nro53umh3f8fetctnmrdltj0fq2vtlpl.apps.googleusercontent.com';
 
@@ -20,12 +20,14 @@ function SignIn() {
     gapi.load('client:auth2', initClient);
   });
 
-  const onSuccess = (res) => {
-    setUser([res.profileObj.name, res.profileObj.email]);
+  const onSuccess = (res: { profileObj: { name: any; email: any; }; }) => {
+    const newUser = [res.profileObj.name, res.profileObj.email];
+    localStorage.setItem('user', JSON.stringify(newUser));
+    setUser(newUser);
   };
   
   const onFailure = (err) => {
-      setUser([]);
+    localStorage.setItem('user', JSON.stringify([]));
   };
 
   return (

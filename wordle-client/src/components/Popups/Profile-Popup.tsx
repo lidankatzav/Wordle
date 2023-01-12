@@ -1,14 +1,20 @@
 import React, { useContext } from 'react';
 import { Button } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
-import { UserContext } from "../providers/UserContext";
-import { TopbarContext } from '../providers/TopbarContext';
+import { useRouteLoaderData } from 'react-router-dom';
+import { TopbarContext } from '../../providers/TopbarContext';
+import { UserContext } from "../../providers/UserContext";
 
 export function ProfilePopup() {
   const {user, setUser} = useContext(UserContext);
   const {showProfile, setShowProfile} = useContext(TopbarContext);
-
+  
   const handleClose = () => setShowProfile(false);
+
+  const handleLogOut = () => {
+    setUser([]);
+    localStorage.setItem('user', JSON.stringify([]));
+  }
 
   return (
     <>
@@ -25,7 +31,7 @@ export function ProfilePopup() {
             <span style={{ fontWeight: 'bold' }}>Email: </span>
             {user[1]}
           </p>
-          <Button onClick = {() => setUser([])}>Log Out</Button>
+          <Button onClick = {handleLogOut}>Log Out</Button>
         </Modal.Body>
       </Modal>
     </>
