@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export function useGame() {
 
-    let numberOfTries = 6;
+    const [numberOfTries, setNumberOfTries] = useState(6);
     const [boardArray, setBoardArray] = useState(Array.from({length: numberOfTries}, () => ["","","","",""]));
     const [colorsArray, setColorsArray] = useState(Array.from({length: numberOfTries}, () => ["","","","",""]));
     const [colorsMap, setColorsMap] = useState(new Map<string,string>());
     const [currentInput, setCurrentInput] =  useState({row: 0, col: 0});
-    const [showWinPopup, setShowWinPopup] = useState(false);
+    // const [showWinPopup, setShowWinPopup] = useState(false);
     const mockWord = "HELLO";
 
     useEffect(() => {
@@ -28,6 +28,14 @@ export function useGame() {
         updateColorsMap();
       }
     }, [colorsArray]);
+
+    
+    const resetGame = () => {
+        setBoardArray(Array.from({length: 6}, () => ["","","","",""]));
+        setColorsArray(Array.from({length: 6}, () => ["","","","",""]));
+        setColorsMap (new Map<string,string>());
+        setCurrentInput({row: 0, col: 0});
+    };
 
     const addToCurrentInput = ():void => {
        if(currentInput.col < 4) {
@@ -125,7 +133,7 @@ export function useGame() {
       for(let colIdx = 0; colIdx < 5; colIdx++) {
         const letter = boardArray[currentInput.row-1][colIdx];
         const color = colorsArray[currentInput.row-1][colIdx];
-        if(colorsMap.get(letter) !== 'green') {
+        if(colorsMap.get(letter) !== 'green' &&  colorsMap.get(letter) !== 'yellow') {
           colorsMap.set(letter,color);
         }
       }
@@ -140,15 +148,14 @@ export function useGame() {
 
     const checkWinOrLost = (indexLine: number): boolean => {
       for(let colIdx = 0; colIdx < 5; colIdx++) {
-        if (colorsArray[currentInput.row-1][colIdx] != "green") {
+        if (colorsArray[currentInput.row-1][colIdx] !== "green") {
           return false;
         }
       }
       return true;
     }  
 
-    return {
-      boardArray, currentInput, handleKeyUp, 
-      colorsArray, chganeClassNameByColor, colorsMap
-    };
+    return {numberOfTries, boardArray, currentInput, handleKeyUp, 
+    colorsArray, chganeClassNameByColor, colorsMap, resetGame};
+    
 }

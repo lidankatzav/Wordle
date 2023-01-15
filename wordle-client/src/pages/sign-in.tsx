@@ -1,4 +1,4 @@
-import React, {useEffect, useContext} from 'react';
+import React, {useEffect, useContext, useRef} from 'react';
 import { GoogleLogin } from 'react-google-login';
 import { gapi } from 'gapi-script';
 import '../css/sign-in.css';
@@ -7,6 +7,9 @@ import {UserContext} from "../providers/UserContext";
 function SignIn() {
 
   const {setUser} =  useContext(UserContext);
+
+  const nameRef = useRef(null);
+  const emailRef = useRef(null);
 
   const clientId = '315535657625-nro53umh3f8fetctnmrdltj0fq2vtlpl.apps.googleusercontent.com';
 
@@ -20,36 +23,47 @@ function SignIn() {
     gapi.load('client:auth2', initClient);
   });
 
-  const onSuccess = (res) => {
-    const newUser = [res.profileObj.name, res.profileObj.email];
-    localStorage.setItem('user', JSON.stringify(newUser));
-    setUser(newUser);
+  const onSuccessOfGoogleLogin = (res) => {
+    connectUser(res.profileObj.name, res.profileObj.email);
   };
   
-  const onFailure = (err) => {
+  const onFailureOfGoogleLogin = (err) => {
     localStorage.setItem('user', JSON.stringify([]));
+    setUser([]);
+    alert("Something bad happend, please try again to sign in!")
   };
+
+  const onSuccessOfFormLogin = () => {
+    connectUser(nameRef.current.value, emailRef.current.value);
+  }
+
+  const connectUser = (name: string, email: string) => {
+    const newUser = [name, email];
+    localStorage.setItem('user', JSON.stringify(newUser));
+    setUser(newUser);
+  }
+
 
   return (
     <>
       <div className="container" id="container">
       <div className="form-container sign-in-container">
-        <form action="#">
+        <form onSubmit={() => onSuccessOfFormLogin()}>
           <h1>Sign In</h1>
           <div className="social-container google">
           <GoogleLogin
                           clientId={clientId}
                           buttonText="Sign in with Google"
-                          onSuccess={onSuccess}
-                          onFailure={onFailure}
+                          onSuccess={onSuccessOfGoogleLogin}
+                          onFailure={onFailureOfGoogleLogin}
                           cookiePolicy={'single_host_origin'}
                           isSignedIn={false}
                           />
           </div>
           <span>Or</span>
-          <input type="email" placeholder="Email" />
-          <input type="name" placeholder="Name" />
-          <button>Sign In</button>
+          <input ref = {emailRef} type="email" placeholder="Email"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required />
+          <input ref = {nameRef}  type="name" placeholder="Name" required/>
+          <button type="submit">Sign In</button>
         </form>
       </div>
       <div className="overlay-container">
@@ -61,7 +75,7 @@ function SignIn() {
             alt="Wordle Logo"
             />
             <br/>
-            <h1>Hello, Guest!</h1>
+            <h1>Hello, Friend!</h1>
           </div>
         </div>
       </div>

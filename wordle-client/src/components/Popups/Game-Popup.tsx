@@ -1,18 +1,31 @@
+import { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import {useGame} from "../../hooks/useGame";
 
-export function GamePopup(props: {title: string, body: string}) {
+export function GamePopup(props?: {title: string, body: string, showPopup: boolean, setShowFunc: Function}) {
 
-    const {title, body} = props;
+    const {title, body, showPopup, setShowFunc} = props;
+    const {resetGame} = useGame();
+
+    const handleCloseModal = () => {
+        setShowFunc(false);
+    }
+    
+    const handleNewGame = () => {
+        resetGame();
+        handleCloseModal();
+    };
 
     return (
         <Modal
         size="sm"
         aria-labelledby="contained-modal-title-vcenter"
         centered
-        show={true}
+        show={showPopup}
+        onHide={handleCloseModal}
         >
-        <Modal.Header>
+        <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
             {title}
             </Modal.Title>
@@ -21,7 +34,7 @@ export function GamePopup(props: {title: string, body: string}) {
             <p>
             {body}
             </p>
-            <Button>Start New Game</Button>
+            <Button onClick = {handleNewGame}>Start New Game</Button>
         </Modal.Body>
         </Modal>
     );
