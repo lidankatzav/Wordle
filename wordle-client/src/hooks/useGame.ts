@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 export function useGame() {
 
-    const [numberOfTries, setNumberOfTries] = useState(6);
+    const [numberOfTries, setNumberOfTries] = useState(5);
     const [boardArray, setBoardArray] = useState(Array.from({length: numberOfTries}, () => ["","","","",""]));
     const [colorsArray, setColorsArray] = useState(Array.from({length: numberOfTries}, () => ["","","","",""]));
     const [colorsMap, setColorsMap] = useState(new Map<string,string>());
