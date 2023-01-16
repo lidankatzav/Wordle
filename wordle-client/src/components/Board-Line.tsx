@@ -10,7 +10,7 @@ export function BoardLine(props: {line: string[], indexLine: number}) {
         <div className="line">
             {line.map((key, colIndex) => {
                 if (indexLine === currentInput.row && colIndex === currentInput.col) {
-                    return <input className="board-letter form-control" value="" autoFocus></input>;
+                    return <input className="board-letter form-control" type="text" value="" autoFocus={true}></input>;
                 }
                 else if(key) {
                     const keyClassName = chganeClassNameByColor(colorsArray[indexLine][colIndex], 'board-letter written-letter');

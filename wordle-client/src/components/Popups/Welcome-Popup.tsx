@@ -1,4 +1,3 @@
-import Game from "../../pages/game";
 import { GamePopup } from "./Game-Popup";
 import { UserContext } from "../../providers/UserContext";
 import { PopupsContext } from "../../providers/PopupsContext";
