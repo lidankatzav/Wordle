@@ -30,7 +30,7 @@ function SignIn() {
   const onFailureOfGoogleLogin = (err) => {
     localStorage.setItem('user', JSON.stringify([]));
     setUser([]);
-    alert("Something bad happend, please try again to sign in!")
+    alert("Please try again to sign in!");
   };
 
   const onSuccessOfFormLogin = () => {

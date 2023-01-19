@@ -20,7 +20,7 @@ export function InfoPopup() {
         </Modal.Header>
         <Modal.Body>
           <p>
-          You get six chances (or you choose another) to guess the secret word, 
+          You get five chances (or you choose another) to guess the secret word, 
           and the color of the letters changes to indicate your progress.
           </p>
           <p>
