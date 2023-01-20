@@ -46,7 +46,12 @@ export class WordsService {
                     arrayResult[idx] = 'grey';
                     continue;
                 }
-                lettersMap.set(letter, lettersMap.get(letter)+1);
+                if(lettersMap.get(letter) === undefined) {
+                    lettersMap.set(letter, 1);
+                }
+                else {
+                    lettersMap.set(letter, lettersMap.get(letter)+1);
+                }
                 if(lettersMap.get(letter) > countLetter) {
                     arrayResult[idx] = 'grey';
                     continue;
@@ -61,9 +66,3 @@ export class WordsService {
         }
     }
 }
-
-// const w1 = new WordsService();
-// console.log(w1.getRandomNumber());
-// console.log(w1.getRandomWord());
-// console.log(w1.setRandomWord());
-// console.log(w1.getRandomWord());

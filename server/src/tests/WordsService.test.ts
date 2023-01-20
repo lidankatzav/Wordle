@@ -56,5 +56,11 @@ describe('WordsService', () => {
             const result = wordsService.compareWord('whelp');
             expect(result).to.eql(['grey', 'yellow', 'yellow', 'green', 'grey']);
         });
+
+        it('should return an array of yellow and grey colors when the word is partially correct', () => {
+            wordsService.randomWord = 'hello';
+            const result = wordsService.compareWord('ahhhh');
+            expect(result).to.eql(['grey', 'yellow', 'grey', 'grey', 'grey']);
+        });
     });
 });
