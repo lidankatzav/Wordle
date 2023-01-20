@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {getRandomWord} from "./server-requests";
 
 export function useGame() {
 
@@ -10,7 +11,7 @@ export function useGame() {
     const [showWelcome, setShowWelcome] = useState(false);
     const [showWin, setShowWin] = useState(false);
     const [showLost, setShowLost] = useState(false);
-    const mockWord = "HELLO";
+    const mockWord = "hello";
 
     useEffect(() => {
       if (currentInput.col === 0 && currentInput.row >= 1) {

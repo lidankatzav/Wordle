@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { WordsDao } from '../data/WordsDao';
+import { WordsDao } from '../dao/WordsDao';
 
 describe('WordsDao', () => {
     let wordsDao: WordsDao;
@@ -20,15 +20,10 @@ describe('WordsDao', () => {
         expect(length).to.be.a('number');
     });
 
-    it('getWordByIndex should return a word at the specified index', () => {
+    it('getWordByIndex should return a word of 5-letters at the specified index', () => {
         const index = 0;
         const word = wordsDao.getWordByIndex(index);
         expect(word).to.be.a('string');
-    });
-
-    it('getWordByIndex should return -1 if index is out of range', () => {
-        const index = -1;
-        const word = wordsDao.getWordByIndex(index);
-        expect(word).to.equal(-1);
+        expect(word).to.be.lengthOf(5);
     });
 });

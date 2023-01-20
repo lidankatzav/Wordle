@@ -10,7 +10,7 @@ import {useGame} from "./hooks/useGame";
 function App(): JSX.Element {
 
   const [user, setUser] = useState([]);
-  const {showWelcome, setShowWelcome, showWin} = useGame();
+  const {showWelcome, setShowWelcome} = useGame();
   
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
