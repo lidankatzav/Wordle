@@ -10,8 +10,8 @@ app.use(cors());
 
 const wordsController = new WordsController();
 
-app.use('/random-word', (req: Request, res: Response) => {
-    wordsController.sendRandomWord(req, res);
+app.get('/random-word', (req: Request, res: Response) => {
+    wordsController.getRandomWord(req, res);
 });
 
 app.listen(port, '0.0.0.0', () => {

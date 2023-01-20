@@ -2,28 +2,59 @@ import { expect } from 'chai';
 import { WordsService } from '../services/WordsService';
 
 describe('WordsService', () => {
-
     let wordsService: WordsService;
 
     beforeEach(() => {
         wordsService = new WordsService();
     });
 
-    it('getRandomNumber should return a number', () => {
-        const number = wordsService.getRandomNumber();
-        expect(number).to.be.a('number');
+    describe('getRandomNumber()', () => {
+        it('should return a random number', () => {
+            const randomNumber = wordsService.getRandomNumber();
+            expect(randomNumber).to.be.a('number');
+        });
     });
 
-    it('getRandomWord should return a word of 5-letters', () => {
-        const word = wordsService.getRandomWord();
-        expect(word).to.be.a('string');
-        expect(word).to.be.lengthOf(5);
+    describe('newRandomWord()', () => {
+        it('should return a random word of 5-letters', () => {
+            const randomWord = wordsService.newRandomWord();
+            expect(randomWord).to.be.a('string');
+            expect(randomWord).to.be.lengthOf(5);
+        });
     });
 
-    it('setRandomWord should change the current random word', () => {
-        const originalWord = wordsService.getRandomWord();
-        wordsService.setRandomWord();
-        const newWord = wordsService.getRandomWord();
-        expect(originalWord).to.not.equal(newWord);
+    describe('getRandomWord()', () => {
+        it('should return the current random word', () => {
+            const randomWord = wordsService.getRandomWord();
+            expect(randomWord).to.be.a('string');
+            expect(randomWord).to.be.lengthOf(5);
+        });
+    });
+
+    describe('setRandomWord()', () => {
+        it('should set a new random word', () => {
+            const oldRandomWord = wordsService.getRandomWord();
+            wordsService.setRandomWord();
+            const newRandomWord = wordsService.getRandomWord();
+            expect(oldRandomWord).to.not.equal(newRandomWord);
+        });
+    });
+
+    describe('compareWord(word: string)', () => {
+        it('should return an array of colors when the word is not in the list', () => {
+            const result = wordsService.compareWord('notaword');
+            expect(result).to.eql(Array(5).fill(''));
+        });
+
+        it('should return an array of green colors when the word is correct', () => {
+            const result = wordsService.compareWord(wordsService.getRandomWord());
+            expect(result).to.eql(Array(5).fill('green'));
+        });
+
+        it('should return an array of yellow, green and grey colors when the word is partially correct', () => {
+            wordsService.randomWord = 'hello';
+            const result = wordsService.compareWord('whelp');
+            expect(result).to.eql(['grey', 'yellow', 'yellow', 'green', 'grey']);
+        });
     });
 });

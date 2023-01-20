@@ -9,8 +9,8 @@ export class WordsController {
         this.wordsService = new WordsService();
     }
 
-    sendRandomWord(req: Request, res: Response) {
+    getRandomWord(req: Request, res: Response) {
         const randomWord = this.wordsService.getRandomWord();
         res.status(200).send(randomWord);
-    }
+    }    
 }
