@@ -3,7 +3,7 @@ import cors from 'cors';
 import { WordsController } from './controllers/WordsContoller';
 
 const app: Express = express();
-const port: number = 9005;
+const port: number = 9020;
 
 app.use(express.json());
 app.use(cors());
@@ -18,7 +18,7 @@ app.post('/random-word', (req: Request, res: Response) => {
     wordsController.setNewRandomWord(req, res);
 });
 
-app.get('/compare-word', (req: Request, res: Response) => {
+app.post('/compare-word', (req: Request, res: Response) => {
     wordsController.checkWord(req, res);
 });
 

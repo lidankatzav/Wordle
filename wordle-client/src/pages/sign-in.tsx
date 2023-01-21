@@ -35,14 +35,13 @@ function SignIn() {
 
   const onSuccessOfFormLogin = () => {
     connectUser(nameRef.current.value, emailRef.current.value);
-  }
+  };
 
   const connectUser = (name: string, email: string) => {
     const newUser = [name, email];
     localStorage.setItem('user', JSON.stringify(newUser));
     setUser(newUser);
-  }
-
+  };
 
   return (
     <>

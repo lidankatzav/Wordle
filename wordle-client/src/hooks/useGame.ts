@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-// import { getRandomWord } from "./server-requests";
-
-// const mockWord = await getRandomWord();
-
+import { compareWord } from "./server-requests";
 
 export function useGame() {
 
@@ -108,23 +105,26 @@ export function useGame() {
       }
     }   
 
-    const checkWord = ():void  => {
+    const checkWord = async ():Promise<void>  => {
       const wordToCheck = boardArray[currentInput.row-1].join('');
+      const newColorsLineOfWord = await compareWord(wordToCheck);
       const newColorsArray = colorsArray.map((line, lineIdx) => {
         if(lineIdx === currentInput.row-1) {
-          const newLine = colorsArray[lineIdx].map( (value, letterIdx) => {
-            if(wordToCheck[letterIdx] === mockWord[letterIdx]) {
-              return "green";
-            }
-            else if(mockWord.includes(wordToCheck[letterIdx])) {
-              return "yellow";
-            }
-            else return "grey";
-          })
-          return newLine;
+          return newColorsLineOfWord;
+          // const newLine = colorsArray[lineIdx].map( (value, letterIdx) => {
+          //   if(wordToCheck[letterIdx] === mockWord[letterIdx]) {
+          //     return "green";
+          //   }
+          //   else if(mockWord.includes(wordToCheck[letterIdx])) {
+          //     return "yellow";
+          //   }
+          //   else return "grey";
+          // })
         }
         else return line;
       });
+      // const newColorsArray = await compareWord(wordToCheck);
+      console.log(newColorsArray);
       setColorsArray(newColorsArray);
     }
 

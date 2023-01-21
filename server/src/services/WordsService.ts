@@ -30,9 +30,9 @@ export class WordsService {
 
         const wordToCompare = word.toLowerCase();
         const wordOfGame = this.getRandomWord();
-        if(!this.wordsDao.getWordsList().includes(wordToCompare)) {
-            return Array(5).fill('');
-        }
+        // if(!this.wordsDao.getWordsList().includes(wordToCompare)) {
+        //     return Array(5).fill('');
+        // }
         if(wordOfGame === wordToCompare) {
             return Array(5).fill('green');
         }
