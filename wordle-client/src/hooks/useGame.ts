@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { compareWord } from "./server-requests";
+import { compareWord, getWordOfGame } from "./server-requests";
 
 export function useGame() {
 
@@ -12,7 +12,11 @@ export function useGame() {
     const [showWelcome, setShowWelcome] = useState(false);
     const [showWin, setShowWin] = useState(false);
     const [showLost, setShowLost] = useState(false);
-    const mockWord = "HELLO";
+    const [wordOfGame, setWordOfGame] = useState("");
+
+    useEffect( () => {
+      getNewWordToGame();
+    }, []);
 
     useEffect(() => {
       if (currentInput.col === 0 && currentInput.row >= 1) {
@@ -38,6 +42,11 @@ export function useGame() {
         resetGame();
       }
     }, [showWin, showLost]);
+
+    const getNewWordToGame = async(): Promise<void>  => {
+      const word = await getWordOfGame();
+      setWordOfGame(word);
+    }
     
     const resetGame = () => {
         setCurrentInput({row: 0, col: 0});
@@ -123,8 +132,6 @@ export function useGame() {
         }
         else return line;
       });
-      // const newColorsArray = await compareWord(wordToCheck);
-      console.log(newColorsArray);
       setColorsArray(newColorsArray);
     }
 
@@ -170,6 +177,6 @@ export function useGame() {
     return {numberOfTries, boardArray, currentInput, handleKeyUp, 
     colorsArray, chganeClassNameByColor, colorsMap,
     showWin, setShowWin, showWelcome, setShowWelcome, 
-    showLost, setShowLost};
+    showLost, setShowLost, wordOfGame};
     
 }

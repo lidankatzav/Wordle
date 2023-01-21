@@ -2,7 +2,7 @@ import React from "react";
 
 const URL: string = 'http://localhost:9020';
 
-export async function getWord() {
+export async function getWordOfGame() {
     const response: Response = await fetch(`${URL}/random-word`);
     const word: string  = await response.json();
     return word;

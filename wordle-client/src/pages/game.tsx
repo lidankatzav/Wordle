@@ -9,6 +9,7 @@ import {TopbarContext} from "../providers/TopbarContext";
 import {useGame} from "../hooks/useGame";
 import { WinPopup } from "../components/Popups/Win-Popup";
 import { LostPopup } from "../components/Popups/Lost-Popup";
+import { GamePopup } from "../components/Popups/Game-Popup";
 
 function Game(): JSX.Element {
 
