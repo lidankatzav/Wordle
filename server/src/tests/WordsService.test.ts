@@ -41,9 +41,10 @@ describe('WordsService', () => {
     });
 
     describe('compareWord(word: string)', () => {
-        it('should return an array of colors when the word is not in the list', () => {
-            const result = wordsService.compareWord('notaword');
-            expect(result).to.eql(Array(5).fill(''));
+        it('should return an array of grey colors when the word is not correct', () => {
+            wordsService.randomWord = 'bbbbb';
+            const result = wordsService.compareWord('aaaaa');
+            expect(result).to.eql(Array(5).fill('grey'));
         });
 
         it('should return an array of green colors when the word is correct', () => {
