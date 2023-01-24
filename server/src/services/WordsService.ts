@@ -28,13 +28,9 @@ export class WordsService {
         this.randomWord = this.newRandomWord();
     }
     
-    compareWord(wordOfClient: string, wordOfGame: string): string[] {
-        
+    compareWords(wordOfClient: string, wordOfGame: string): string[] {
         const wordGame = wordOfGame.toLowerCase();
         const wordClient = wordOfClient.toLowerCase();
-        // if(!this.wordsDao.getWordsList().includes(wordToCompare)) {
-        //     return Array(5).fill('');
-        // }
         if(wordGame === wordClient) {
             return Array(5).fill('green');
         }

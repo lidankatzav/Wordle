@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 
-export class cryptoService {
+export class CryptoService {
      
     encrypt(word: string) {
 
@@ -18,12 +18,12 @@ export class cryptoService {
         
         return ({
             iv: iv.toString('hex'),
-            word: encryptedWord,
+            encryptedWord: encryptedWord,
             key: key.toString('hex')
         });
     }
 
-    decrypt(encryptedWord: string, keyFromClient: string, ivFromClient: string) {
+    decrypt(encryptedWord: any, keyFromClient: any, ivFromClient: any) {
 
             // Get the key, iv, and encrypted data
             const algorithm = 'aes-256-cbc';
@@ -35,9 +35,7 @@ export class cryptoService {
             let decryptedWord = decipher.update(encryptedWord, 'hex', 'utf8');
             decryptedWord += decipher.final('utf8');
           
-            return ({
-              word: decryptedWord
-            });  
+            return decryptedWord;
     }
 }
 

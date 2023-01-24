@@ -1,12 +1,14 @@
-import { cryptoService } from '../services/CryptoService';
+import { CryptoService } from '../services/CryptoService';
 import * as chai from 'chai';
 
 const expect = chai.expect;
 
 describe('cryptoService', () => {
-    let cryptoInstance: cryptoService;
+    
+    let cryptoInstance: CryptoService;
+
     beforeEach(() => {
-        cryptoInstance = new cryptoService();
+        cryptoInstance = new CryptoService();
     });
 
     describe('encrypt', () => {
