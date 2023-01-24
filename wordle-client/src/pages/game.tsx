@@ -9,20 +9,18 @@ import {TopbarContext} from "../providers/TopbarContext";
 import {useGame} from "../hooks/useGame";
 import { WinPopup } from "../components/Popups/Win-Popup";
 import { LostPopup } from "../components/Popups/Lost-Popup";
-import { GamePopup } from "../components/Popups/Game-Popup";
 
 function Game(): JSX.Element {
 
-  const {numberOfTries, boardArray, currentInput, handleKeyUp, 
-    colorsArray, chganeClassNameByColor, colorsMap, showWin, setShowWin, 
-    showLost, setShowLost} = useGame();
-  const [showInfo, setShowInfo] = useState(false);
-  const [showProfile, setShowProfile] = useState(false);
-  
+  const {gameState, setGameState, handleKeyUp, chganeClassNameByColor} = useGame();
+  const [topbarPopus, setTopbarPopus] = useState({
+    showInfo: false, 
+    showProfile: false
+  });
+
   return (
-    <BoardContext.Provider value = { {numberOfTries, boardArray, currentInput, handleKeyUp, 
-      colorsArray, chganeClassNameByColor, colorsMap, showWin, setShowWin, showLost, setShowLost} }>
-    <TopbarContext.Provider value = {{showInfo, setShowInfo, showProfile, setShowProfile}}>
+    <BoardContext.Provider value = { {gameState, setGameState, handleKeyUp, chganeClassNameByColor} }>
+    <TopbarContext.Provider value = {{topbarPopus, setTopbarPopus}}>
       <div onKeyUp = {(event) =>  handleKeyUp(event.key)} >
       <Topbar/>
       <InfoPopup/>

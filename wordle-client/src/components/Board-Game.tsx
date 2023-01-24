@@ -5,12 +5,12 @@ import {BoardContext} from "../providers/BoardContext";
 
 export function BoardGame(): JSX.Element {
 
-    const {boardArray} = useContext(BoardContext);
+    const {gameState} = useContext(BoardContext);
 
     return (
         <>
         <div className="board">
-            {boardArray.map((line: string[], index:number) => 
+            {gameState.boardArray.map((line: string[], index:number) => 
                 <BoardLine line={line} indexLine = {index} key={index}/>)}
         </div>
         </>

@@ -7,20 +7,25 @@ import infopart3 from "../../imgs/info-part3.png";
 
 
 export function InfoPopup() {
-  const {showInfo, setShowInfo} = useContext(TopbarContext);
 
-  const handleClose = () => setShowInfo(false);
+  const {topbarPopus, setTopbarPopus} = useContext(TopbarContext);
+
+  const handleClose = () => {
+      topbarPopus.showInfo = false;
+      const newTopbarPopus = Object.create(topbarPopus);
+      setTopbarPopus(newTopbarPopus);
+  };
 
   return (
     <>
 
-      <Modal show={showInfo} onHide={handleClose}>
+      <Modal show={topbarPopus.showInfo} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>How To Play?</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <p>
-          You get five chances (or you choose another) to guess the secret word, 
+          You get six chances to guess the secret word, 
           and the color of the letters changes to indicate your progress.
           </p>
           <p>

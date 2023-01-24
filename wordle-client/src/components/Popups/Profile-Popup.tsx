@@ -5,19 +5,24 @@ import { TopbarContext } from '../../providers/TopbarContext';
 import { UserContext } from "../../providers/UserContext";
 
 export function ProfilePopup() {
+
   const {user, setUser} = useContext(UserContext);
-  const {showProfile, setShowProfile} = useContext(TopbarContext);
+  const {topbarPopus, setTopbarPopus} = useContext(TopbarContext);
   
-  const handleClose = () => setShowProfile(false);
+  const handleClose = () => {
+    topbarPopus.showProfile = false;
+    const newTopbarPopus = Object.create(topbarPopus);
+    setTopbarPopus(newTopbarPopus);
+  };
 
   const handleLogOut = () => {
     setUser([]);
     localStorage.setItem('user', JSON.stringify([]));
-  }
+  };
 
   return (
     <>
-      <Modal show={showProfile} onHide={handleClose}>
+      <Modal show={topbarPopus.showProfile} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Your Profile</Modal.Title>
         </Modal.Header>

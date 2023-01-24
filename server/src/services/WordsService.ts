@@ -19,7 +19,9 @@ export class WordsService {
     }
 
     getRandomWord(): string {
-        return this.randomWord;
+        const prevWord = this.randomWord;
+        this.setRandomWord();
+        return prevWord;
     }
 
     setRandomWord(): void {

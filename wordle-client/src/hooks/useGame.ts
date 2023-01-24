@@ -1,106 +1,128 @@
 import React, { useEffect, useState } from "react";
-
 import { compareWord, getWordOfGame } from "./server-requests";
 
 export function useGame() {
 
-    const [numberOfTries, setNumberOfTries] = useState(5);
-    const [boardArray, setBoardArray] = useState(Array.from({length: numberOfTries}, () => ["","","","",""]));
-    const [colorsArray, setColorsArray] = useState(Array.from({length: numberOfTries}, () => ["","","","",""]));
-    const [colorsMap, setColorsMap] = useState(new Map<string,string>());
-    const [currentInput, setCurrentInput] =  useState({row: 0, col: 0});
-    const [showWelcome, setShowWelcome] = useState(false);
-    const [showWin, setShowWin] = useState(false);
-    const [showLost, setShowLost] = useState(false);
-    const [wordOfGame, setWordOfGame] = useState("");
+    const [gameState, setGameState] = useState({
+      boardArray: Array.from({ length: 6 }, () => ["", "", "", "", ""]),
+      colorsArray: Array.from({ length: 6 }, () => ["", "", "", "", ""]),
+      colorsMap: new Map<string, string>(),
+      currentInput: { row: 0, col: 0 },
+      showWelcome: false,
+      showWin: false,
+      showLost: false,
+      wordOfGame: ""
+    });
 
     useEffect( () => {
       getNewWordToGame();
-    }, []);
+    }, [gameState.wordOfGame]);
 
     useEffect(() => {
-      if (currentInput.col === 0 && currentInput.row >= 1) {
+      if (gameState.currentInput.col === 0 && gameState.currentInput.row >= 1) {
         checkWord();
       }
-    }, [currentInput]);
+    }, [gameState.currentInput]);
 
     useEffect(() => {
-      if(currentInput.row >= 1) {
-        const result = checkWinOrLost(currentInput.row-1);
+      if(gameState.currentInput.row >= 1) {
+        const result = checkWinOrLost();
         if(result) {
-          setShowWin(true);
+          gameState.showWin = true;
+          const newGameState = Object.create(gameState);
+          setGameState(newGameState);
         }
-        else if(!result && currentInput.row === numberOfTries) {
-          setShowLost(true);
+        else if(!result && gameState.currentInput.row === 6) {
+          gameState.showLost = true;
+          const newGameState = Object.create(gameState);
+          setGameState(newGameState);
         }
         updateColorsMap();
       }
-    }, [colorsArray]);
+    }, [gameState.colorsArray]);
 
     useEffect(() => {
-      if(showWin === false && currentInput.row >= 1) {
+      if((gameState.showWin === false && gameState.showLost === false && gameState.currentInput.row >= 1) ) {
         resetGame();
       }
-    }, [showWin, showLost]);
+    }, [gameState.showWin, gameState.showLost]);
 
     const getNewWordToGame = async(): Promise<void>  => {
       const word = await getWordOfGame();
-      setWordOfGame(word);
-    }
+      gameState.wordOfGame = word;
+      const newGameState = Object.create(gameState);
+      setGameState(newGameState);
+    };
     
     const resetGame = () => {
-        setCurrentInput({row: 0, col: 0});
-        setBoardArray(Array.from({length: numberOfTries}, () => ["","","","",""]));
-        setColorsArray(Array.from({length: numberOfTries}, () => ["","","","",""]));
-        setColorsMap (new Map<string,string>());
+        setGameState({ 
+          boardArray: Array.from({length: 6}, () => ["","","","",""]),
+          colorsArray: Array.from({length: 6}, () => ["","","","",""]),
+          colorsMap: new Map<string,string>(),
+          currentInput: {row: 0, col: 0}, 
+          showWelcome: false,
+          showWin: false, 
+          showLost: false, 
+          wordOfGame: ""
+        });      
     };
 
     const addToCurrentInput = ():void => {
-       if(currentInput.col < 4) {
-          setCurrentInput({row: currentInput.row, col: currentInput.col + 1});
+       if(gameState.currentInput.col <= 4) { 
+          gameState.currentInput = {row: gameState.currentInput.row, col: gameState.currentInput.col + 1};
+          const newGameState = Object.create(gameState);
+          setGameState(newGameState);
         } 
-        if (currentInput.col === 4) {
-          setCurrentInput({row: currentInput.row+1, col: 0});
+        if (gameState.currentInput.col > 4) {
+          gameState.currentInput = {row: gameState.currentInput.row+1, col: 0};
+          const newGameState = Object.create(gameState);
+          setGameState(newGameState);
         }
     };
   
     const addLetterToBoard = (key: string):void => {
-      const newBoardArray = boardArray.map((boardRow, rowIndex) => {
+      const newBoardArray = gameState.boardArray.map((boardRow, rowIndex) => {
         const newLine = boardRow.map((value, colIndex) => {
-          if(currentInput.row === rowIndex && currentInput.col === colIndex) {
+          if(gameState.currentInput.row === rowIndex && gameState.currentInput.col === colIndex) {
               return key.toUpperCase();
           } 
           else return value;
         })
         return newLine;
       })
-      setBoardArray(newBoardArray);
+      gameState.boardArray = newBoardArray;
+      const newGameState = Object.create(gameState);
+      setGameState(newGameState);
     };
   
     const decreaseCurrentInput = (): void => {
-      if(currentInput.col === 0) {
+      if(gameState.currentInput.col === 0) {
        return;
       }
       else {
-        setCurrentInput({row: currentInput.row, col: currentInput.col-1});
+          gameState.currentInput ={row: gameState.currentInput.row, col: gameState.currentInput.col-1};
+          const newGameState = Object.create(gameState);
+          setGameState(newGameState);
       }
-    }
+    };
   
     const removeLetterFromBoard = (): void  => {
-      const newBoardArray = boardArray.map((boardRow, rowIndex) => {
+      const newBoardArray = gameState.boardArray.map((boardRow, rowIndex) => {
         const newLine = boardRow.map((value, colIndex) => {
-          if(currentInput.row === rowIndex && currentInput.col-1 === colIndex) {
+          if(gameState.currentInput.row === rowIndex && gameState.currentInput.col-1 === colIndex) {
               return "";
           } 
           else return value;
         })
         return newLine;
       })
-      setBoardArray(newBoardArray);
-    }
+      gameState.boardArray = newBoardArray;
+      const newGameState = Object.create(gameState);
+      setGameState(newGameState);
+    };
   
     const handleKeyUp = (key:string):void => {
-      if(!showLost && !showWin) {
+      if(!gameState.showLost && !gameState.showWin) {
         if (key === "Backspace" || key === "Del") {
           removeLetterFromBoard();
           decreaseCurrentInput();
@@ -112,28 +134,21 @@ export function useGame() {
           return;
         }
       }
-    }   
+    }; 
 
     const checkWord = async ():Promise<void>  => {
-      const wordToCheck = boardArray[currentInput.row-1].join('');
+      const wordToCheck = gameState.boardArray[gameState.currentInput.row-1].join('');
       const newColorsLineOfWord = await compareWord(wordToCheck);
-      const newColorsArray = colorsArray.map((line, lineIdx) => {
-        if(lineIdx === currentInput.row-1) {
+      const newColorsArray = gameState.colorsArray.map((line, lineIdx) => {
+        if(lineIdx === gameState.currentInput.row-1) {
           return newColorsLineOfWord;
-          // const newLine = colorsArray[lineIdx].map( (value, letterIdx) => {
-          //   if(wordToCheck[letterIdx] === mockWord[letterIdx]) {
-          //     return "green";
-          //   }
-          //   else if(mockWord.includes(wordToCheck[letterIdx])) {
-          //     return "yellow";
-          //   }
-          //   else return "grey";
-          // })
         }
         else return line;
       });
-      setColorsArray(newColorsArray);
-    }
+      gameState.colorsArray = newColorsArray;
+      const newGameState = Object.create(gameState);
+      setGameState(newGameState);
+    };
 
     const chganeClassNameByColor = (color: string, writtenLetterClassName: string) =>  {
       switch(color) {
@@ -146,37 +161,38 @@ export function useGame() {
           default:
             return writtenLetterClassName;
         }
-    }
+    };
 
     const updateColorsMap = () => {
       for(let colIdx = 0; colIdx < 5; colIdx++) {
-        const letter = boardArray[currentInput.row-1][colIdx];
-        const color = colorsArray[currentInput.row-1][colIdx];
-        if(colorsMap.get(letter) !== 'green' &&  colorsMap.get(letter) !== 'yellow') {
-          colorsMap.set(letter,color);
+        const letter = gameState.boardArray[gameState.currentInput.row-1][colIdx];
+        const color = gameState.colorsArray[gameState.currentInput.row-1][colIdx];
+        if(gameState.colorsMap.get(letter) !== 'yellow' && gameState.colorsMap.get(letter) !== 'green') {
+          gameState.colorsMap.set(letter,color);
+        }
+        if(color === 'green') {
+          gameState.colorsMap.set(letter,'green');
         }
       }
       const newColorsMap = new Map<string, string>();
-      for (let entry of Array.from(colorsMap.entries())) {
+      for (let entry of Array.from(gameState.colorsMap.entries())) {
         let key = entry[0];
         let value = entry[1];
         newColorsMap.set(key,value);
       }
-      setColorsMap(newColorsMap);
+      gameState.colorsMap = newColorsMap;
+      const newGameState = Object.create(gameState);
+      setGameState(newGameState);
     };
 
-    const checkWinOrLost = (indexLine: number): boolean => {
+    const checkWinOrLost = (): boolean => {
       for(let colIdx = 0; colIdx < 5; colIdx++) {
-        if (colorsArray[currentInput.row-1][colIdx] !== "green") {
+        if (gameState.colorsArray[gameState.currentInput.row-1][colIdx] !== "green") {
           return false;
         }
       }
       return true;
-    }  
+    }; 
 
-    return {numberOfTries, boardArray, currentInput, handleKeyUp, 
-    colorsArray, chganeClassNameByColor, colorsMap,
-    showWin, setShowWin, showWelcome, setShowWelcome, 
-    showLost, setShowLost, wordOfGame};
-    
+    return {gameState, setGameState, handleKeyUp, chganeClassNameByColor};
 }

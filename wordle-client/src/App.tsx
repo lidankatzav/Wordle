@@ -10,21 +10,23 @@ import {useGame} from "./hooks/useGame";
 function App(): JSX.Element {
 
   const [user, setUser] = useState([]);
-  const {showWelcome, setShowWelcome} = useGame();
+  const {gameState, setGameState} = useGame();
   
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
     if (storedUser) {
       setUser(storedUser);
       if(storedUser.length === 2) {
-        setShowWelcome(true);
+        gameState.showWelcome = true;
+        const newGameState = Object.create(gameState);
+        setGameState(newGameState);
       }
     }
   }, []);
 
   return (
     <UserContext.Provider value = {{user, setUser}}>
-    <PopupsContext.Provider value = {{showWelcome, setShowWelcome}}>
+    <PopupsContext.Provider value = {{gameState, setGameState}}>
     <WelcomePopup/>
     <Routes>
       {user.length === 0 && <Route path="*" element={<SignIn/>} />}
