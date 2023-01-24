@@ -28,22 +28,22 @@ export class WordsService {
         this.randomWord = this.newRandomWord();
     }
     
-    compareWord(word: string): string[] {
-
-        const wordToCompare = word.toLowerCase();
-        const wordOfGame = this.getRandomWord();
+    compareWord(wordOfClient: string, wordOfGame: string): string[] {
+        
+        const wordGame = wordOfGame.toLowerCase();
+        const wordClient = wordOfClient.toLowerCase();
         // if(!this.wordsDao.getWordsList().includes(wordToCompare)) {
         //     return Array(5).fill('');
         // }
-        if(wordOfGame === wordToCompare) {
+        if(wordGame === wordClient) {
             return Array(5).fill('green');
         }
         else {
             const arrayResult = Array(5);
             const lettersMap = new Map<string, number>();
             for(let idx = 0; idx<5; idx++) {
-                const letter = wordToCompare[idx];
-                const countLetter = wordOfGame.split('').reduce((acc, val) => val === letter ? acc + 1 : acc, 0);;
+                const letter = wordClient[idx];
+                const countLetter = wordGame.split('').reduce((acc, val) => val === letter ? acc + 1 : acc, 0);;
                 if(countLetter === 0) {
                     arrayResult[idx] = 'grey';
                     continue;
@@ -58,7 +58,7 @@ export class WordsService {
                     arrayResult[idx] = 'grey';
                     continue;
                 }
-                if(wordOfGame[idx] === wordToCompare[idx]) {
+                if(wordGame[idx] === wordClient[idx]) {
                     arrayResult[idx] = 'green';
                     continue;
                 }

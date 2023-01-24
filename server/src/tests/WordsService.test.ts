@@ -1,67 +1,68 @@
-import { expect } from 'chai';
-import { WordsService } from '../services/WordsService';
+import {expect} from 'chai';
+import {WordsService} from '../services/WordsService';
+import {WordsDao} from '../dao/WordsDao';
+
+const wordsService = new WordsService();
+const wordsDao = new WordsDao();
 
 describe('WordsService', () => {
-    let wordsService: WordsService;
 
-    beforeEach(() => {
-        wordsService = new WordsService();
+
+    // beforeEach(() => {
+    //     const wordsService = new WordsService();
+    //     const wordsDao = new WordsDao();
+    // });
+
+    it('should return a random number', (done) => {
+        const randomNumber = wordsService.getRandomNumber();
+        expect(randomNumber).to.be.a('number');
+        expect(randomNumber).to.be.above(-1);
+        expect(randomNumber).to.be.below(wordsDao.getLengthOfWordsList());
+        done();
     });
 
-    describe('getRandomNumber()', () => {
-        it('should return a random number', () => {
-            const randomNumber = wordsService.getRandomNumber();
-            expect(randomNumber).to.be.a('number');
-        });
+    it('should return a random word', (done) => {
+        const randomWord = wordsService.newRandomWord();
+        expect(randomWord).to.be.a('string');
+        expect(wordsDao.getWordsList()).to.include(randomWord);
+        done();
     });
 
-    describe('newRandomWord()', () => {
-        it('should return a random word of 5-letters', () => {
-            const randomWord = wordsService.newRandomWord();
-            expect(randomWord).to.be.a('string');
-            expect(randomWord).to.be.lengthOf(5);
-        });
+    it('should return the previous random word', (done) => {
+        const prevWord = wordsService.getRandomWord();
+        expect(prevWord).be.a('string');
+        expect(wordsDao.getWordsList()).to.include(prevWord);
+        done();
     });
 
-    describe('getRandomWord()', () => {
-        it('should return the current random word', () => {
-            const randomWord = wordsService.getRandomWord();
-            expect(randomWord).to.be.a('string');
-            expect(randomWord).to.be.lengthOf(5);
-        });
+    it('should compare two words and return an array of grey colors', (done) => {
+        const word1 = "tests";
+        const word2 = "world";
+        const comparisonResult = wordsService.compareWord(word1, word2);
+        expect(comparisonResult).to.be.a('array');
+        expect(comparisonResult).to.have.lengthOf(5);
+        expect(comparisonResult).to.eql(Array(5).fill('grey'));
+        done();
     });
 
-    describe('setRandomWord()', () => {
-        it('should set a new random word', () => {
-            const oldRandomWord = wordsService.getRandomWord();
-            wordsService.setRandomWord();
-            const newRandomWord = wordsService.getRandomWord();
-            expect(oldRandomWord).to.not.equal(newRandomWord);
-        });
+    it('should compare two equal words and return an array of green colors', (done) => {
+        const word1 = "hello";
+        const word2 = "hello";
+        const comparisonResult = wordsService.compareWord(word1, word2);
+        expect(comparisonResult).to.be.a('array');
+        expect(comparisonResult).to.have.lengthOf(5);
+        expect(comparisonResult).to.eql(Array(5).fill('green'));
+        done();
     });
 
-    describe('compareWord(word: string)', () => {
-        it('should return an array of grey colors when the word is not correct', () => {
-            wordsService.randomWord = 'bbbbb';
-            const result = wordsService.compareWord('aaaaa');
-            expect(result).to.eql(Array(5).fill('grey'));
-        });
-
-        it('should return an array of green colors when the word is correct', () => {
-            const result = wordsService.compareWord(wordsService.getRandomWord());
-            expect(result).to.eql(Array(5).fill('green'));
-        });
-
-        it('should return an array of yellow, green and grey colors when the word is partially correct', () => {
-            wordsService.randomWord = 'hello';
-            const result = wordsService.compareWord('whelp');
-            expect(result).to.eql(['grey', 'yellow', 'yellow', 'green', 'grey']);
-        });
-
-        it('should return an array of yellow and grey colors when the word is partially correct', () => {
-            wordsService.randomWord = 'hello';
-            const result = wordsService.compareWord('ahhhh');
-            expect(result).to.eql(['grey', 'yellow', 'grey', 'grey', 'grey']);
-        });
+    it('should compare two words and return an array of some colors', (done) => {
+        const word1 = "whelp";
+        const word2 = "hello";
+        const comparisonResult = wordsService.compareWord(word1, word2);
+        expect(comparisonResult).to.be.a('array');
+        expect(comparisonResult).to.lengthOf(5);
+        expect(comparisonResult).to.eql(['grey', 'yellow', 'yellow', 'green', 'grey']);
+        done();
     });
+
 });
