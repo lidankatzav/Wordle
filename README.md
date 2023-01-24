@@ -13,5 +13,3 @@
  go to 'wordle-client' folder --> write cd '../wordle-client'.
 
 5. write 'npm start'.
-
-
