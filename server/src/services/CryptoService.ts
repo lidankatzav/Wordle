@@ -37,5 +37,5 @@ export class CryptoService {
           
             return decryptedWord;
     }
-}
+};
 

@@ -9,5 +9,5 @@ export interface gameState {
   showWelcome: boolean;
   showWin: boolean;
   showLost: boolean;
-  wordOfGame: string
+  wordOfGame: object;
 };

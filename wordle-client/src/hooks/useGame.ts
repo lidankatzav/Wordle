@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { compareWord, getWordOfGame } from "./server-requests";
+import { compareWords, getWordOfGame } from "./server-requests";
 
 export function useGame() {
 
@@ -11,13 +11,13 @@ export function useGame() {
       showWelcome: false,
       showWin: false,
       showLost: false,
-      wordOfGame: ""
+      wordOfGame: {}
     });
 
     useEffect( () => {
-      getNewWordToGame();
-    }, [gameState.wordOfGame]);
-
+      getNewWordToGame().catch((err) => alert("Networking Error! Please try again!"));
+    }, []);
+    
     useEffect(() => {
       if (gameState.currentInput.col === 0 && gameState.currentInput.row >= 1) {
         checkWord();
@@ -43,28 +43,15 @@ export function useGame() {
 
     useEffect(() => {
       if((gameState.showWin === false && gameState.showLost === false && gameState.currentInput.row >= 1) ) {
-        resetGame();
+        window.location.reload();
       }
     }, [gameState.showWin, gameState.showLost]);
 
     const getNewWordToGame = async(): Promise<void>  => {
-      const word = await getWordOfGame();
-      gameState.wordOfGame = word;
+      const wordObject = await getWordOfGame();
+      gameState.wordOfGame = wordObject;
       const newGameState = Object.create(gameState);
       setGameState(newGameState);
-    };
-    
-    const resetGame = () => {
-        setGameState({ 
-          boardArray: Array.from({length: 6}, () => ["","","","",""]),
-          colorsArray: Array.from({length: 6}, () => ["","","","",""]),
-          colorsMap: new Map<string,string>(),
-          currentInput: {row: 0, col: 0}, 
-          showWelcome: false,
-          showWin: false, 
-          showLost: false, 
-          wordOfGame: ""
-        });      
     };
 
     const addToCurrentInput = ():void => {
@@ -122,7 +109,7 @@ export function useGame() {
     };
   
     const handleKeyUp = (key:string):void => {
-      if(!gameState.showLost && !gameState.showWin) {
+      if(!gameState.showLost && !gameState.showWin && !gameState.showWelcome) {
         if (key === "Backspace" || key === "Del") {
           removeLetterFromBoard();
           decreaseCurrentInput();
@@ -136,15 +123,16 @@ export function useGame() {
       }
     }; 
 
-    const checkWord = async ():Promise<void>  => {
+    const checkWord = async (): Promise<void> => {
       const wordToCheck = gameState.boardArray[gameState.currentInput.row-1].join('');
-      const newColorsLineOfWord = await compareWord(wordToCheck);
+      const newColorsLineOfWord = await compareWords(wordToCheck, gameState.wordOfGame)
+      .catch((err) => alert("Networking Error! Please try again!"));
       const newColorsArray = gameState.colorsArray.map((line, lineIdx) => {
         if(lineIdx === gameState.currentInput.row-1) {
-          return newColorsLineOfWord;
+          return newColorsLineOfWord ;
         }
         else return line;
-      });
+      }) as unknown as string[][];
       gameState.colorsArray = newColorsArray;
       const newGameState = Object.create(gameState);
       setGameState(newGameState);

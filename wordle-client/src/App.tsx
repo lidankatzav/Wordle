@@ -29,8 +29,8 @@ function App(): JSX.Element {
     <PopupsContext.Provider value = {{gameState, setGameState}}>
     <WelcomePopup/>
     <Routes>
-      {user.length === 0 && <Route path="*" element={<SignIn/>} />}
-      {user.length !== 0 && <Route path="*" element={<Game/>} />}
+      {user.length === 0 && <Route path="/*" element={<SignIn/>} />}
+      {user.length !== 0 && <Route path="/*" element={<Game/>} />}
     </Routes>
     </PopupsContext.Provider>
     </UserContext.Provider>

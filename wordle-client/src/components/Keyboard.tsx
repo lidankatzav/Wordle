@@ -11,9 +11,9 @@ export function Keyboard(): JSX.Element {
             <br/>
             <div className="keyboard">
                 {keyboardLayout.map((line) => (
-                    <div className = "keyboard-line">
+                    <div className = "keyboard-line" key={line[0]}>
                         {line.map((key) => 
-                        <KeyboradKey keyValue = {key}/>
+                        <KeyboradKey keyValue = {key} key={key}/>
                         )}
                     </div>
                 ))}

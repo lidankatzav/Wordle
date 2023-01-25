@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {Topbar} from "../components/Topbar";
 import {BoardGame} from "../components/Board-Game";
 import {Keyboard} from "../components/Keyboard";
@@ -9,6 +9,7 @@ import {TopbarContext} from "../providers/TopbarContext";
 import {useGame} from "../hooks/useGame";
 import { WinPopup } from "../components/Popups/Win-Popup";
 import { LostPopup } from "../components/Popups/Lost-Popup";
+import { UserContext } from "../providers/UserContext";
 
 function Game(): JSX.Element {
 
@@ -17,11 +18,18 @@ function Game(): JSX.Element {
     showInfo: false, 
     showProfile: false
   });
+  const {user} = useContext(UserContext);
+
+  const handleKeyUpOnBoard = (event: React.KeyboardEvent) => {
+    if(!topbarPopus.showInfo && !topbarPopus.showProfile) {
+      handleKeyUp(event.key);
+    }
+  };
 
   return (
     <BoardContext.Provider value = { {gameState, setGameState, handleKeyUp, chganeClassNameByColor} }>
     <TopbarContext.Provider value = {{topbarPopus, setTopbarPopus}}>
-      <div onKeyUp = {(event) =>  handleKeyUp(event.key)} >
+      <div onKeyUp = {(event) => handleKeyUpOnBoard(event)} >
       <Topbar/>
       <InfoPopup/>
       <ProfilePopup/>
