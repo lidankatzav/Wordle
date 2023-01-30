@@ -2,13 +2,12 @@ import React, { useContext } from 'react';
 import { Button } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import { TopbarContext } from '../../providers/TopbarContext';
-import { UserContext } from "../../providers/UserContext";
+import { UserContext } from '../../providers/UserContext';
 
 export function ProfilePopup() {
+  const { user, setUser } = useContext(UserContext);
+  const { topbarPopus, setTopbarPopus } = useContext(TopbarContext);
 
-  const {user, setUser} = useContext(UserContext);
-  const {topbarPopus, setTopbarPopus} = useContext(TopbarContext);
-  
   const handleClose = () => {
     topbarPopus.showProfile = false;
     const newTopbarPopus = Object.create(topbarPopus);
@@ -35,7 +34,7 @@ export function ProfilePopup() {
             <span style={{ fontWeight: 'bold' }}>Email: </span>
             {user[1]}
           </p>
-          <Button onClick = {handleLogOut}>Log Out</Button>
+          <Button onClick={handleLogOut}>Log Out</Button>
         </Modal.Body>
       </Modal>
     </>

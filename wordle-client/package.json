@@ -28,6 +28,7 @@
     "webpack-cli": "^5.0.1"
   },
   "scripts": {
+    "format": "prettier --write src",
     "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
