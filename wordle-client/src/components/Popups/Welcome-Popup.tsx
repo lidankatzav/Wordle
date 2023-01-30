@@ -9,9 +9,9 @@ export function WelcomePopup() {
     const {user} = useContext(UserContext);
     const {gameState, setGameState} = useContext(PopupsContext);
 
-    const userBody: string = `Hey ${user[0]}, do you want to start play?`;
+    const userBody: string = `Hey ${user[0]}, let׳s play!`;
 
     return (
-        <GamePopup title = 'New Game' body = {userBody} showPopup={gameState.showWelcome} gameState = {gameState} setGameState  = {setGameState} typeModal = 'welcome'/>
+        <GamePopup title = 'Welcome Back' body = {userBody} showPopup={gameState.showWelcome} gameState = {gameState} setGameState  = {setGameState} typeModal = 'welcome'/>
     );
 }

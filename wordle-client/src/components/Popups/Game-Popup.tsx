@@ -42,8 +42,7 @@ export function GamePopup(props: {title: string, body: string, showPopup: boolea
             <p>
             {body}
             </p>
-            {typeModal === 'welcome' && <Button onClick = {handleCloseModal}>Start Now</Button>}
-            {typeModal !== 'welcome' && <Button onClick = {handleCloseModal}>Start New Game</Button>}
+            <Button onClick = {handleCloseModal}>Start New Game</Button>
         </Modal.Body>
         </Modal>
     );

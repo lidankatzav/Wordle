@@ -11,12 +11,14 @@ export function useGame() {
       showWelcome: false,
       showWin: false,
       showLost: false,
-      wordOfGame: {}
+      wordOfGame: null
     });
 
     useEffect( () => {
-      getNewWordToGame().catch((err) => alert("Networking Error! Please try again!"));
-    }, []);
+      if(gameState.wordOfGame === null) {
+        getNewWordToGame().catch((err) => alert("Networking Error! Please try again!"));
+      }
+    }, [gameState]);
     
     useEffect(() => {
       if (gameState.currentInput.col === 0 && gameState.currentInput.row >= 1) {
@@ -43,7 +45,16 @@ export function useGame() {
 
     useEffect(() => {
       if((gameState.showWin === false && gameState.showLost === false && gameState.currentInput.row >= 1) ) {
-        window.location.reload();
+        setGameState({
+          boardArray: Array.from({ length: 6 }, () => ["", "", "", "", ""]),
+          colorsArray: Array.from({ length: 6 }, () => ["", "", "", "", ""]),
+          colorsMap: new Map<string, string>(),
+          currentInput: { row: 0, col: 0 },
+          showWelcome: false,
+          showWin: false,
+          showLost: false,
+          wordOfGame: null
+        });
       }
     }, [gameState.showWin, gameState.showLost]);
 
